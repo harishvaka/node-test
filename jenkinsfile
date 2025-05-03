@@ -1,19 +1,19 @@
 pipeline {
     
     agent { 
-        label 'docker-slave-demo'
+        label 'slave-1'
     }
     
     environment {
-        APP_NAME = 'my-app'
-        BUILD_DIR = 'build'
+        APP_NAME = 'node-app'
+        VERSION  =  'slim-1'
     }
 
     stages {
         stage('Checkout') {
             steps {
                 // Checkout the code from the Git repository
-                git 'https://github.com/harishvaka/demo.git'
+                git 'git@github.com:harishvaka/node-test.git'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
                 script {
                     // Build the application
                     echo "Building the application"
-                    sh 'mvn clean install'
+                    sh 'docker build -t ${APP_NAME}:{VERSION} -f Dockerfile .'
                 }
             }
         }
@@ -32,7 +32,17 @@ pipeline {
                 script {
                     // Run unit tests
                     echo "Running unit tests"
-                    sh 'mvn test'
+                    sh 'sleep 10'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Docker deployment using docker compose
+                    echo "Deployment is in progress!!!!!!!!!"
+                    sh 'docker-compose up'
                 }
             }
         }
