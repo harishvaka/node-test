@@ -41,7 +41,8 @@ pipeline {
                 script {
                     // Docker deployment using docker compose
                     echo "Deployment is in progress!!!!!!!!!"
-                    sh 'docker-compose up'
+                    sh 'docker-compose down -v'
+                    sh 'docker-compose up -d'
                 }
             }
         }
