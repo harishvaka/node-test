@@ -8,6 +8,7 @@ pipeline {
         VERSION  =  'slim-1'
     }
 
+    
     stages {
         stage('Checkout') {
             steps {
