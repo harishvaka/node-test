@@ -21,7 +21,7 @@ pipeline {
                 script {
                     // Build the application
                     echo "Building the application"
-                    sh 'docker build -t ${APP_NAME}:{VERSION} -f Dockerfile .'
+                    sh 'docker build -t ${APP_NAME}:${VERSION} -f Dockerfile .'
                 }
             }
         }
