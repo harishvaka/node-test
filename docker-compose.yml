@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   app:
-    image: node-test:1.0
+    image: ${APP_NAME}:${VERSION}
     deploy:
       replicas: 3
       restart_policy:
         condition: on-failure
     ports:
-      - "3000":"3000"
+      - "3000:3000"
     environment:
       - MONGO_URL=mongodb://mongo:27017/mydb
     depends_on:
